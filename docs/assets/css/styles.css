@@ -216,6 +216,17 @@ img {
     }
 }
 
+.nav-menu {
+    position: fixed;
+    top: -100%;                         /* Hidden until clicked since overflow is hidden */
+    left: 0;
+    background-color: var(--body-color);
+    width: 100%;
+    box-shadow: 0 12px 24px var(--shadow-color);
+    padding-block: 5rem 4rem;
+    transition: top .4s;
+}
+
 .nav-list {
     display: flex;
     flex-direction: column;
