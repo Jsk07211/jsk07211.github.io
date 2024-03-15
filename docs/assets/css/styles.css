@@ -1,0 +1,271 @@
+/* ======== VARIABLES CSS ======== */
+:root {
+    /* rem = element font size relative to size of root element (usually 16px for browswers) */
+    --header-height: 3.5rem;
+  
+    /* Colors */
+    --hue: 255;
+    --first-color: hsl(var(--hue), 90%, 60%);
+    --first-color-alt: hsl(var(--hue), 82%, 56%);
+    --first-color-light: hsl(var(--hue), 40%, 80%);
+    --title-color: hsl(var(--hue), 24%, 16%);
+    --text-color: hsl(var(--hue), 8%, 45%);
+    --text-color-light: hsl(var(--hue), 8%, 60%);
+    --white-color: hsl(0, 0%, 100%);
+    --body-color: hsl(0, 0%, 100%);
+    --container-color: hsl(0, 0%, 100%);
+    --shadow-color: hsla(var(--hue), 90%, 30%, .1);
+  
+    /* Font and typography */
+    --body-font: "Syne", sans-serif;
+    --biggest-font-size: 2rem;
+    --h1-font-size: 1.5rem;
+    --h2-font-size: 1.25rem;
+    --h3-font-size: 1rem;
+    --normal-font-size: .938rem;
+    --small-font-size: .813rem;
+    --smaller-font-size: .75rem;
+  
+    /* Font Weight */
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-semi-bold: 600;
+  
+    /* z index */
+    --z-tooltip: 10;
+    --z-fixed: 100;
+    --z-modal: 1000;
+}
+  
+/* For Mobile Viewing */
+@media screen and (min-width: 1150px) {
+    :root {
+      --biggest-font-size: 4.5rem;
+      --h1-font-size: 2.25rem;
+      --h2-font-size: 1.5rem;
+      --h3-font-size: 1.25rem;
+      --normal-font-size: 1.125rem;
+      --small-font-size: .875rem;
+      --smaller-font-size: .813rem;
+    }
+}
+
+/* ======== BASE ======== */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+  
+html {
+    scroll-behavior: smooth;
+}
+  
+body,
+input,
+textarea,
+button {
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
+}
+  
+body {
+    background-color: var(--body-color);
+    color: var(--text-color);
+    transition: background-color .4s;       /* .4s is the duration of transition */
+}
+  
+input,
+button,
+textarea {
+    border: none;
+    outline: none;
+}
+  
+h1, h2, h3, h4 {
+    color: var(--title-color);
+    font-weight: var(--font-semi-bold);
+}
+  
+ul {
+    list-style: none;
+}
+  
+a {
+    text-decoration: none;
+}
+  
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* ======== REUSABLE CSS CLASSES ======== */
+.container {
+    max-width: 1120px;
+    margin-inline: 1.5rem;
+}
+  
+.grid {
+    display: grid;
+    gap: 1.5rem;
+}
+  
+.section {
+    padding-block: 5rem 1rem;
+}
+
+.section-title {
+    font-size: var(--h1-font-size);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Border for image to fit into */
+.profile-content {
+    width: 180px;
+    height: 180px;
+    border: 10px solid var(--first-color);
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+/* img/video resized to fit its container; cover so it doesn't stretch the image */
+.profile-img {
+    width: 100%;
+    object-fit: cover;
+}
+  
+.main {
+    overflow: hidden;
+}
+
+.button {
+    display: inline-block;
+    background-color: var(--first-color);
+    color: var(--white-color);
+    font-weight: var(--font-semi-bold);
+    padding: 1rem 2rem;
+    transition: background-color .4s, box-shadow .4s;
+}
+
+.button:hover {
+    background-color: var(--first-color-alt);
+    box-shadow: 0 8px 24px hsla(var(--hue), 90%, 30%, .3);
+}
+
+/* ======== Header CSS ======== */
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: var(--first-color);
+    z-index: var(--z-fixed);
+    transition: background-color .4s, box-shadow .4s;
+}
+
+.nav {
+    position: relative;
+    height: 3.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    color: var(--white-color);
+    font-weight: var(--font-semi-bold);
+    transition: color .4s;
+}
+
+.nav-toggle,
+.nav-close {
+    display: inline-flex;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.nav-toggle {
+    color: var(--white-color);
+    transition: color .4s;
+}
+
+.nav-close {
+    color: var(--title-color);
+    position: absolute;
+    top: 1.15rem;
+    right: 1.5rem;
+}
+
+/* Navigation for mobile */
+/* Changes to mobile viewing when browser window is 1150px or less*/
+@media screen and (max-width: 1150px) {
+    .nav-menu {
+        position: fixed;
+        top: -100%;                         /* Hidden until clicked since overflow is hidden */
+        left: 0;
+        background-color: var(--body-color);
+        width: 100%;
+        box-shadow: 0 12px 24px var(--shadow-color);
+        padding-block: 5rem 4rem;
+        transition: top .4s;
+    }
+}
+
+.nav-list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2.5rem;
+    text-align: center;
+}
+
+.nav-link {
+    color: var(--title-color);
+    font-weight: var(--font-semi-bold);
+    transition: .4s;
+}
+
+.nav-link:hover {
+    color: var(--first-color);
+}
+
+.show-menu {
+    top: 0;                                  /* No longer hidden outside of visible area */ 
+}
+
+/* ======== About Me CSS ======== */
+.home {
+    position: relative;
+    border-bottom: 8px solid var(--first-color);
+}
+
+.home-rectangle {
+    width: 100%;
+    height: 220px;
+    background-color: var(--first-color);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.home-container {
+    padding-block: 1rem 3rem;
+}
+
+.home-profile {
+    justify-self: center;
+}
+
+.home-data {
+    row-gap: .75rem;
+    text-align: center;
+}
+
+.home-name {
+    font-size: var(--biggest-font-size);
+}
